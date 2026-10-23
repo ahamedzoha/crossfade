@@ -1,0 +1,30 @@
+# Crossfade: copy this file, set APP_URL, then `docker compose up -d`.
+services:
+  crossfade:
+    image: ghcr.io/ahamedzoha/crossfade:latest
+    # build: .            # or build it yourself from this repo
+    container_name: crossfade
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      # The address you open Crossfade at. Spotify sign-in redirects back here,
+      # and it must be HTTPS (or http://127.0.0.1) for that to work directly.
+      APP_URL: "http://localhost:8080"
+      TZ: "UTC"
+      # Owner of the data volume (match your host user for bind mounts).
+      PUID: "1000"
+      PGID: "1000"
+      # Optional. Generated into /data/.secret-key on first run if unset.
+      # SECRET_KEY: "change-me-to-a-long-random-string"
+      # Optional. Only when Crossfade sits behind an auth proxy (Authentik, Authelia…)
+      # that always sets this header. Anyone who can reach the port directly could forge it.
+      # TRUSTED_HEADER: "Remote-User"
+      # Optional. Configure provider apps here instead of in Settings.
+      # SPOTIFY_CLIENT_ID: ""
+      # SPOTIFY_CLIENT_SECRET: ""
+      # APPLE_TEAM_ID: ""
+      # APPLE_KEY_ID: ""
+      # APPLE_PRIVATE_KEY_FILE: "/run/secrets/apple_musickit.p8"
+    volumes:
+      - ./data:/data

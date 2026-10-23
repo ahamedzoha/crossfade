@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.next/
+out/
+*.tsbuildinfo
+.env
+.env.local
+/data/
+apps/api/data/
+coverage/
+.DS_Store
+.impeccable/review/
+.impeccable/config.local.json
+demo-data/

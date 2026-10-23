@@ -1,0 +1,774 @@
+@import 'tailwindcss';
+
+/*
+ * Stage Setlist.
+ * The deck is the shell; paper sheets hold the lists; marker ink annotates them.
+ * Spike-tape colour only ever means a service or a state.
+ */
+
+@theme {
+  --color-deck: #16130f;
+  --color-n1: #1f1b16;
+  --color-n2: #2b261f;
+  --color-n3: #433c33;
+  --color-n4: #5c544a;
+  --color-n5: #8a8175;
+  --color-n6: #b4aca0;
+  --color-n7: #e3dfd7;
+  --color-paper: #f6f5f1;
+  --color-paper-2: #ecebe5;
+  --color-ink: #111111;
+
+  --color-sp: #3ad65b;
+  --color-yt: #ff5a1f;
+  --color-am: #ff3d8b;
+  --color-warn: #f4e400;
+
+  --font-sans: var(--font-archivo), 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --font-hand: var(--font-shantell), 'Shantell Sans', ui-rounded, cursive;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', 'Menlo', monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --tape-shadow: 0 1px 0 rgb(0 0 0 / 0.18);
+    --sheet-shadow: 0 1px 1px rgb(0 0 0 / 0.35), 0 18px 32px -18px rgb(0 0 0 / 0.75);
+  }
+
+  html {
+    background: var(--color-deck);
+    -webkit-text-size-adjust: 100%;
+    scrollbar-color: var(--color-n3) var(--color-deck);
+    scrollbar-width: thin;
+  }
+
+  body {
+    min-height: 100dvh;
+    background: var(--color-deck);
+    color: var(--color-paper);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.45;
+    font-variant-numeric: tabular-nums;
+    caret-color: var(--color-warn);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-warn);
+    color: var(--color-ink);
+  }
+
+  /* Text links always read as links: a soft underline that goes solid on hover. */
+  a {
+    color: inherit;
+    text-decoration-line: underline;
+    text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1.5px;
+    transition: text-decoration-color 140ms;
+  }
+  a:hover {
+    text-decoration-color: currentColor;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-paper);
+    outline-offset: 2px;
+  }
+  .on-paper :focus-visible,
+  .sheet :focus-visible {
+    outline-color: var(--color-ink);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-n3);
+    border: 3px solid var(--color-deck);
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .sheet ::-webkit-scrollbar-thumb {
+    background: var(--color-n6);
+    border-color: var(--color-paper);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  /* ------------------------------------------------------------------ type */
+  .display {
+    font-weight: 900;
+    font-stretch: 112%;
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+    line-height: 1;
+  }
+  .label {
+    display: block;
+    font-size: 11px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-n5);
+  }
+  .sheet .label {
+    color: var(--color-n4);
+  }
+  .note {
+    font-family: var(--font-hand);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.15;
+    transform: rotate(-1.2deg);
+    transform-origin: left center;
+  }
+  .note mark {
+    background: var(--color-warn);
+    color: var(--color-ink);
+    padding: 0 3px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  /* ------------------------------------------------------------------ tape */
+  .tape {
+    display: inline-grid;
+    place-items: center;
+    min-width: 30px;
+    height: 16px;
+    padding: 0 5px;
+    font-size: 9px;
+    line-height: 1;
+    font-weight: 800;
+    font-style: normal;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+    box-shadow: var(--tape-shadow);
+    white-space: nowrap;
+  }
+  .tape-sp {
+    background: var(--color-sp);
+  }
+  .tape-yt {
+    background: var(--color-yt);
+  }
+  .tape-am {
+    background: var(--color-am);
+  }
+  .tape-warn {
+    background: var(--color-warn);
+  }
+  /* Black/yellow hazard tape: something is broken. */
+  .tape-hazard {
+    background: repeating-linear-gradient(-45deg, var(--color-warn) 0 5px, var(--color-ink) 5px 10px);
+    color: transparent;
+    min-width: 30px;
+  }
+  .tape-gaffer {
+    background: var(--color-n3);
+    color: var(--color-n7);
+  }
+  .tape-missing {
+    background: transparent;
+    box-shadow: none;
+    outline: 1px dashed var(--color-n5);
+    outline-offset: -1px;
+    color: var(--color-n4);
+  }
+  .tape-struck {
+    background: transparent;
+    box-shadow: none;
+    outline: 1px solid var(--color-n5);
+    outline-offset: -1px;
+    color: var(--color-n4);
+    text-decoration: line-through;
+    text-decoration-thickness: 1.5px;
+  }
+
+  /* ------------------------------------------------------------------ sheet */
+  .sheet {
+    position: relative;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    box-shadow: var(--sheet-shadow);
+  }
+  .sheet-tilt {
+    transform: rotate(-0.25deg);
+  }
+  .sheet a:not(.btn) {
+    color: var(--color-ink);
+  }
+  .tape-corner {
+    position: absolute;
+    top: -9px;
+    width: 92px;
+    height: 24px;
+    pointer-events: none;
+    color: var(--color-n3);
+    opacity: 0.94;
+  }
+  .tape-corner.l {
+    left: -30px;
+    transform: rotate(-36deg);
+  }
+  .tape-corner.r {
+    right: -30px;
+    transform: rotate(36deg);
+  }
+
+  /* ------------------------------------------------------------------ buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 18px;
+    border-radius: 2px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    text-decoration: none;
+    transition:
+      transform 120ms var(--ease-out-expo),
+      background-color 160ms,
+      box-shadow 160ms,
+      color 160ms;
+  }
+  .btn:active:not(:disabled) {
+    transform: translateY(1px) scale(0.985);
+  }
+  .btn:disabled,
+  .btn[aria-disabled='true'] {
+    cursor: not-allowed;
+  }
+  .btn-ghost:disabled,
+  .btn-outline:disabled,
+  .btn-quiet:disabled {
+    opacity: 0.45;
+  }
+  /* Filled buttons empty out when unavailable instead of turning into grey slabs. */
+  .btn-primary:disabled,
+  .btn-warn:disabled {
+    background: transparent;
+    color: var(--color-n5);
+    box-shadow: inset 0 0 0 1px var(--color-n3);
+  }
+  .btn-ink:disabled {
+    background: transparent;
+    color: var(--color-n4);
+    box-shadow: inset 0 0 0 1.5px #c9c3b8;
+  }
+  .btn-sm {
+    height: 32px;
+    padding: 0 12px;
+    font-size: 13px;
+  }
+  .btn-xs {
+    height: 26px;
+    padding: 0 9px;
+    font-size: 12px;
+  }
+  /* Primary on the deck: a paper slip. */
+  .btn-primary {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    box-shadow: 0 1px 0 rgb(0 0 0 / 0.4);
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: #ffffff;
+  }
+  /* Primary on paper: marker ink. */
+  .btn-ink {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+  .btn-ink:hover:not(:disabled) {
+    background: #2a2622;
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-paper);
+    box-shadow: inset 0 0 0 1px var(--color-n4);
+  }
+  .btn-ghost:hover:not(:disabled) {
+    background: var(--color-n1);
+    box-shadow: inset 0 0 0 1px var(--color-n5);
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--color-ink);
+    box-shadow: inset 0 0 0 1.5px var(--color-ink);
+  }
+  .btn-outline:hover:not(:disabled) {
+    background: var(--color-paper-2);
+  }
+  .btn-quiet {
+    background: transparent;
+    color: inherit;
+    padding: 0 8px;
+  }
+  .btn-quiet:hover:not(:disabled) {
+    background: rgb(127 120 110 / 0.16);
+  }
+  .btn-warn {
+    background: var(--color-warn);
+    color: var(--color-ink);
+  }
+  .btn-warn:hover:not(:disabled) {
+    background: #fff04a;
+  }
+
+  /* ------------------------------------------------------------------ fields */
+  .field {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 2px;
+    background-color: var(--color-n1);
+    color: var(--color-paper);
+    box-shadow: inset 0 0 0 1px var(--color-n3);
+    font-size: 14px;
+    transition: box-shadow 140ms;
+  }
+  .field::placeholder {
+    color: #988f83;
+  }
+  .field:hover {
+    box-shadow: inset 0 0 0 1px var(--color-n4);
+  }
+  .field:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 2px var(--color-paper);
+  }
+  textarea.field {
+    height: auto;
+    min-height: 96px;
+    padding: 10px 12px;
+    line-height: 1.4;
+    resize: vertical;
+  }
+  select.field {
+    appearance: none;
+    padding-right: 34px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%23b4aca0' stroke-width='1.6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+  }
+  .sheet .field,
+  .on-paper .field {
+    background-color: #ffffff;
+    color: var(--color-ink);
+    box-shadow: inset 0 0 0 1px #c9c3b8;
+  }
+  .sheet .field::placeholder,
+  .on-paper .field::placeholder {
+    color: var(--color-n4);
+  }
+  .sheet .field:focus,
+  .on-paper .field:focus {
+    box-shadow: inset 0 0 0 2px var(--color-ink);
+  }
+  .sheet select.field,
+  .on-paper select.field {
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%23111' stroke-width='1.6'/%3E%3C/svg%3E");
+  }
+
+  .check {
+    appearance: none;
+    flex: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 2px;
+    box-shadow: inset 0 0 0 1.5px currentColor;
+    display: inline-grid;
+    place-items: center;
+    cursor: pointer;
+  }
+  .check:checked {
+    background: currentColor;
+  }
+  .check:checked::after {
+    content: '';
+    width: 9px;
+    height: 5px;
+    border-left: 2px solid var(--color-deck);
+    border-bottom: 2px solid var(--color-deck);
+    transform: translateY(-1px) rotate(-45deg);
+  }
+  .sheet .check:checked::after,
+  .on-paper .check:checked::after {
+    border-color: var(--color-paper);
+  }
+
+  /* ------------------------------------------------------------------ setlist rows */
+  .setlist-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 26px 34px minmax(0, 1fr) 52px 120px minmax(0, 210px);
+    grid-template-areas: 'plus num title dur tabs note';
+    column-gap: 10px;
+    align-items: start;
+    min-height: 54px;
+    padding: 8px 0 7px;
+    border-bottom: 1px solid var(--color-n7);
+  }
+  /* Very long sheets skip rendering rows far off screen. */
+  .setlist-long .setlist-row {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 54px;
+  }
+  .sl-plus {
+    grid-area: plus;
+  }
+  /* Rows that show cover art add a square column between number and title. */
+  .setlist-row.has-art,
+  .setlist-head.has-art {
+    grid-template-columns: 26px 34px 44px minmax(0, 1fr) 52px 120px minmax(0, 210px);
+  }
+  .setlist-row.has-art {
+    grid-template-areas: 'plus num art title dur tabs note';
+    min-height: 60px;
+  }
+  .sl-art {
+    grid-area: art;
+    display: block;
+    width: 44px;
+    height: 44px;
+    background: var(--color-paper-2);
+    box-shadow: inset 0 0 0 1px rgb(17 17 17 / 0.08);
+    overflow: hidden;
+  }
+  .sl-art img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .setlist-row.is-struck .sl-art img {
+    filter: grayscale(1);
+    opacity: 0.45;
+  }
+  .sl-num {
+    grid-area: num;
+  }
+  .sl-title {
+    grid-area: title;
+  }
+  .sl-dur {
+    grid-area: dur;
+  }
+  .sl-tabs {
+    grid-area: tabs;
+  }
+  .sl-note {
+    grid-area: note;
+  }
+  .sl-actions {
+    grid-area: actions;
+    display: none;
+  }
+  /* Sheets whose rows carry actions reserve a fixed column so every row lines up. */
+  .has-actions .setlist-row,
+  .has-actions .setlist-head {
+    grid-template-columns: 26px 34px minmax(0, 1fr) 52px 120px minmax(0, 210px) 76px;
+  }
+  .has-actions .setlist-row {
+    grid-template-areas: 'plus num title dur tabs note actions';
+  }
+  .has-actions .setlist-row.has-art,
+  .has-actions .setlist-head.has-art {
+    grid-template-columns: 26px 34px 44px minmax(0, 1fr) 52px 120px minmax(0, 210px) 76px;
+  }
+  .has-actions .setlist-row.has-art {
+    grid-template-areas: 'plus num art title dur tabs note actions';
+  }
+  .has-actions .sl-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .setlist-head {
+    display: grid;
+    grid-template-columns: 26px 34px minmax(0, 1fr) 52px 120px minmax(0, 210px);
+    column-gap: 10px;
+    align-items: center;
+    height: 28px;
+    border-bottom: 2px solid var(--color-ink);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-n4);
+  }
+  .setlist-title {
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 1.05;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow-wrap: anywhere;
+  }
+  /* Struck titles stay on one line so the marker crosses all of it. */
+  .setlist-row.is-struck .setlist-title {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .setlist-sub {
+    display: block;
+    margin-top: 5px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--color-n4);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .setlist-row.is-struck .setlist-title {
+    color: var(--color-n4);
+  }
+  .setlist-num {
+    text-align: right;
+    font-weight: 800;
+    font-size: 15px;
+    line-height: 24px;
+  }
+  .setlist-dur {
+    text-align: right;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+  }
+  .setlist-plus {
+    font-family: var(--font-hand);
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 24px;
+    text-align: center;
+    transform: rotate(-8deg);
+  }
+  /* The strike spans number, title and time, never the tape or notes columns. */
+  .strike-lane {
+    grid-column: num-start / dur-end;
+    grid-row: 1;
+    position: relative;
+    height: 24px;
+    pointer-events: none;
+  }
+  .strike {
+    position: absolute;
+    left: -6px;
+    top: 1px;
+    width: calc(100% + 6px);
+    height: 22px;
+    overflow: visible;
+    pointer-events: none;
+  }
+  .strike path {
+    fill: none;
+    stroke: var(--color-ink);
+    stroke-width: 3.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .strike.draw path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: strike-draw 520ms var(--ease-out-expo) forwards;
+    animation-delay: var(--strike-delay, 0ms);
+  }
+  @keyframes strike-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* ------------------------------------------------------------------ ruler (true-scale durations) */
+  .ruler {
+    position: relative;
+    height: 12px;
+    border-bottom: 1px solid var(--color-n5);
+    background: repeating-linear-gradient(90deg, var(--color-n5) 0 1px, transparent 1px var(--tick, 40px));
+    background-size: 100% 5px;
+    background-repeat: no-repeat;
+    background-position: bottom left;
+  }
+  .ruler > i {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 8px;
+    background: var(--color-ink);
+  }
+  .bar {
+    display: block;
+    height: 7px;
+    background: var(--color-n7);
+    min-width: 2px;
+  }
+
+  .kbd {
+    display: inline-grid;
+    place-items: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 2px;
+    box-shadow: inset 0 0 0 1px currentColor;
+    opacity: 0.75;
+  }
+
+  .hairline {
+    border-color: var(--color-n2);
+  }
+
+  .skeleton {
+    background: linear-gradient(90deg, var(--color-n1), var(--color-n2), var(--color-n1));
+    background-size: 200% 100%;
+    animation: skeleton 1.4s ease-in-out infinite;
+  }
+  .sheet .skeleton {
+    background: linear-gradient(90deg, var(--color-paper-2), #e2e0d8, var(--color-paper-2));
+    background-size: 200% 100%;
+  }
+  @keyframes skeleton {
+    from {
+      background-position: 100% 0;
+    }
+    to {
+      background-position: -100% 0;
+    }
+  }
+
+  .spin {
+    animation: spin 900ms linear infinite;
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .press-in {
+    animation: press-in 380ms var(--ease-out-expo) both;
+  }
+  @keyframes press-in {
+    from {
+      transform: translateY(-6px) rotate(-1.5deg);
+      box-shadow: 0 10px 14px rgb(0 0 0 / 0.35);
+    }
+  }
+}
+
+@media (max-width: 760px) {
+  .setlist-row {
+    grid-template-columns: 18px 26px minmax(0, 1fr) auto;
+    grid-template-areas:
+      'plus num title dur'
+      '. . tabs tabs'
+      '. . note note';
+    column-gap: 8px;
+    row-gap: 6px;
+  }
+  .setlist-row.has-art {
+    grid-template-columns: 18px 26px 40px minmax(0, 1fr) auto;
+    grid-template-areas:
+      'plus num art title dur'
+      '. . . tabs tabs'
+      '. . . note note';
+  }
+  .sl-art {
+    width: 40px;
+    height: 40px;
+  }
+  .has-actions.editing .setlist-row {
+    grid-template-columns: 18px 26px minmax(0, 1fr) auto;
+    grid-template-areas:
+      'plus num title dur'
+      '. . tabs actions'
+      '. . note note';
+  }
+  .has-actions.editing .setlist-row.has-art {
+    grid-template-columns: 18px 26px 40px minmax(0, 1fr) auto;
+    grid-template-areas:
+      'plus num art title dur'
+      '. . . tabs actions'
+      '. . . note note';
+  }
+  /* On touch screens row actions appear only in edit mode. */
+  .has-actions:not(.editing) .setlist-row {
+    grid-template-columns: 18px 26px minmax(0, 1fr) auto;
+    grid-template-areas:
+      'plus num title dur'
+      '. . tabs tabs'
+      '. . note note';
+  }
+  .has-actions:not(.editing) .setlist-row.has-art {
+    grid-template-columns: 18px 26px 40px minmax(0, 1fr) auto;
+    grid-template-areas:
+      'plus num art title dur'
+      '. . . tabs tabs'
+      '. . . note note';
+  }
+  .has-actions:not(.editing) .sl-actions {
+    display: none;
+  }
+  .sl-note:empty {
+    display: none;
+  }
+  .setlist-head {
+    display: none;
+  }
+  .setlist-title {
+    font-size: 17px;
+  }
+  .setlist-row.is-struck .setlist-title {
+    white-space: nowrap;
+  }
+  .tape-corner {
+    width: 64px;
+  }
+  .tape-corner.l {
+    left: -14px;
+  }
+  .tape-corner.r {
+    right: -14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 1ms !important;
+  }
+}

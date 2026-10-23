@@ -1,0 +1,292 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-23T17:14:36.529588Z",
+  "title": "Design System: Crossfade",
+  "extensions": {
+    "colorMeta": {
+      "deck": {
+        "role": "neutral",
+        "displayName": "Stage Deck",
+        "canonical": "#16130f",
+        "tonalRamp": [
+          "#16130f",
+          "#1f1b16",
+          "#2b261f",
+          "#433c33",
+          "#5c544a",
+          "#8a8175",
+          "#b4aca0",
+          "#e3dfd7"
+        ]
+      },
+      "paper": {
+        "role": "primary",
+        "displayName": "Printer Paper",
+        "canonical": "#f6f5f1",
+        "tonalRamp": [
+          "#433c33",
+          "#5c544a",
+          "#8a8175",
+          "#b4aca0",
+          "#e3dfd7",
+          "#ecebe5",
+          "#f6f5f1",
+          "#ffffff"
+        ]
+      },
+      "ink": {
+        "role": "primary",
+        "displayName": "Marker Ink",
+        "canonical": "#111111",
+        "tonalRamp": [
+          "#111111",
+          "#1f1b16",
+          "#2b261f",
+          "#433c33",
+          "#5c544a",
+          "#8a8175",
+          "#b4aca0",
+          "#e3dfd7"
+        ]
+      },
+      "tape-spotify": {
+        "role": "secondary",
+        "displayName": "Spotify Green",
+        "canonical": "#3ad65b",
+        "tonalRamp": [
+          "#0b3d17",
+          "#12602a",
+          "#1a8a3d",
+          "#26b04c",
+          "#3ad65b",
+          "#6fe388",
+          "#a2eeb3",
+          "#d3f8dc"
+        ]
+      },
+      "tape-youtube": {
+        "role": "secondary",
+        "displayName": "YouTube Orange-Red",
+        "canonical": "#ff5a1f",
+        "tonalRamp": [
+          "#4d1500",
+          "#7a2300",
+          "#b33a0a",
+          "#e04a12",
+          "#ff5a1f",
+          "#ff8656",
+          "#ffb08f",
+          "#ffd9c9"
+        ]
+      },
+      "tape-apple": {
+        "role": "secondary",
+        "displayName": "Apple Pink",
+        "canonical": "#ff3d8b",
+        "tonalRamp": [
+          "#4d0a29",
+          "#7a1442",
+          "#b02062",
+          "#e02f78",
+          "#ff3d8b",
+          "#ff6fa9",
+          "#ff9fc7",
+          "#ffd0e3"
+        ]
+      },
+      "tape-warn": {
+        "role": "tertiary",
+        "displayName": "Caution Yellow",
+        "canonical": "#f4e400",
+        "tonalRamp": [
+          "#4d4500",
+          "#7a6f00",
+          "#b3a500",
+          "#dbcc00",
+          "#f4e400",
+          "#f7ea4d",
+          "#faf08f",
+          "#fdf8c9"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Status claim and playlist name; 900 caps, stretched width."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Page titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Track titles on setlist rows."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Rows, forms, descriptions; tabular numerals."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Field labels, axis labels, side-column section headings."
+      },
+      "note": {
+        "displayName": "Margin Note",
+        "purpose": "Handwritten explanation beside a strike or change."
+      }
+    },
+    "shadows": [
+      {
+        "name": "sheet",
+        "value": "0 1px 1px rgb(0 0 0 / 0.35), 0 18px 32px -18px rgb(0 0 0 / 0.75)",
+        "purpose": "Paper sheets on the deck."
+      },
+      {
+        "name": "tape",
+        "value": "0 1px 0 rgb(0 0 0 / 0.18)",
+        "purpose": "Tape tabs."
+      },
+      {
+        "name": "press-in",
+        "value": "0 10px 14px rgb(0 0 0 / 0.35)",
+        "purpose": "Start frame of a newly placed element."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Button press, strike draw, press-in."
+      },
+      {
+        "name": "strike-draw",
+        "value": "520ms ease-out-expo",
+        "purpose": "Marker strike drawing across a removed row."
+      },
+      {
+        "name": "press-in",
+        "value": "380ms ease-out-expo",
+        "purpose": "Tape and sheets pressing down."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile",
+        "value": "760px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button (deck)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Paper slip, the main action on the deck.",
+      "html": "<button class=\"ds-btn ds-btn-primary\">Sync now</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 18px;border-radius:2px;font:700 14px/1 Archivo,system-ui,sans-serif;cursor:pointer;border:0;transition:transform 120ms cubic-bezier(.16,1,.3,1),background-color 160ms}.ds-btn:active{transform:translateY(1px) scale(.985)}.ds-btn:focus-visible{outline:2px solid #f6f5f1;outline-offset:2px}.ds-btn-primary{background:var(--color-paper,#f6f5f1);color:#111;box-shadow:0 1px 0 rgb(0 0 0/.4)}.ds-btn-primary:hover{background:#fff}"
+    },
+    {
+      "name": "Ink Button (paper)",
+      "kind": "button",
+      "refersTo": "button-ink",
+      "description": "Primary action on a paper sheet.",
+      "html": "<button class=\"ds-btn ds-btn-ink\">Save</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 18px;border-radius:2px;font:700 14px/1 Archivo,system-ui,sans-serif;cursor:pointer;border:0;transition:transform 120ms cubic-bezier(.16,1,.3,1),background-color 160ms}.ds-btn:active{transform:translateY(1px) scale(.985)}.ds-btn:focus-visible{outline:2px solid #f6f5f1;outline-offset:2px}.ds-btn-ink{background:#111;color:#f6f5f1}.ds-btn-ink:hover{background:#2a2622}.ds-btn-ink:focus-visible{outline-color:#111}"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary action on the deck.",
+      "html": "<button class=\"ds-btn ds-btn-ghost\">Cancel</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 18px;border-radius:2px;font:700 14px/1 Archivo,system-ui,sans-serif;cursor:pointer;border:0;transition:transform 120ms cubic-bezier(.16,1,.3,1),background-color 160ms}.ds-btn:active{transform:translateY(1px) scale(.985)}.ds-btn:focus-visible{outline:2px solid #f6f5f1;outline-offset:2px}.ds-btn-ghost{background:transparent;color:#f6f5f1;box-shadow:inset 0 0 0 1px #5c544a}.ds-btn-ghost:hover{background:#1f1b16;box-shadow:inset 0 0 0 1px #8a8175}"
+    },
+    {
+      "name": "Warn Button",
+      "kind": "button",
+      "refersTo": "button-warn",
+      "description": "The single attention action.",
+      "html": "<button class=\"ds-btn ds-btn-warn\">Review</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 18px;border-radius:2px;font:700 14px/1 Archivo,system-ui,sans-serif;cursor:pointer;border:0;transition:transform 120ms cubic-bezier(.16,1,.3,1),background-color 160ms}.ds-btn:active{transform:translateY(1px) scale(.985)}.ds-btn:focus-visible{outline:2px solid #f6f5f1;outline-offset:2px}.ds-btn-warn{background:#f4e400;color:#111}.ds-btn-warn:hover{background:#fff04a}"
+    },
+    {
+      "name": "Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Deck text field with inset stroke.",
+      "html": "<input class=\"ds-field\" placeholder=\"Name\">",
+      "css": ".ds-field{width:220px;height:40px;padding:0 12px;border:0;border-radius:2px;background:#1f1b16;color:#f6f5f1;font:14px Archivo,system-ui,sans-serif;box-shadow:inset 0 0 0 1px #433c33;transition:box-shadow 140ms}.ds-field::placeholder{color:#988f83}.ds-field:hover{box-shadow:inset 0 0 0 1px #5c544a}.ds-field:focus,.ds-field:focus-visible{outline:none;box-shadow:inset 0 0 0 2px #f6f5f1}"
+    },
+    {
+      "name": "Service Tape",
+      "kind": "chip",
+      "refersTo": "tape-spotify",
+      "description": "Spike-tape tab; colour means a service or attention.",
+      "html": "<span class=\"ds-tape ds-tape-sp\">SP</span> <span class=\"ds-tape ds-tape-yt\">YT</span> <span class=\"ds-tape ds-tape-am\">AM</span> <span class=\"ds-tape ds-tape-warn\">Review</span>",
+      "css": ".ds-tape{display:inline-grid;place-items:center;min-width:30px;height:16px;padding:0 5px;font:800 9px/1 Archivo,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#111;box-shadow:0 1px 0 rgb(0 0 0/.18)}.ds-tape-sp{background:#3ad65b}.ds-tape-yt{background:#ff5a1f}.ds-tape-am{background:#ff3d8b}.ds-tape-warn{background:#f4e400}"
+    },
+    {
+      "name": "Setlist Row",
+      "kind": "custom",
+      "refersTo": "sheet",
+      "description": "Paper row with number, caps title, duration, tape and margin note; struck rows get an ink line.",
+      "html": "<div class=\"ds-sheet\"><div class=\"ds-row\"><b class=\"ds-num\">07</b><div><div class=\"ds-title\">Midnight City</div><span class=\"ds-sub\">M83</span></div><span class=\"ds-dur\">4:03</span></div><div class=\"ds-row ds-struck\"><b class=\"ds-num\">08</b><div><div class=\"ds-title\">Midnight City</div></div><span class=\"ds-dur\">4:03</span><span class=\"ds-note\">duplicate of 07</span></div></div>",
+      "css": ".ds-sheet{width:420px;background:#f6f5f1;color:#111;padding:6px 14px;box-shadow:0 1px 1px rgb(0 0 0/.35),0 18px 32px -18px rgb(0 0 0/.75);font-family:Archivo,system-ui,sans-serif}.ds-row{position:relative;display:grid;grid-template-columns:34px 1fr 52px;column-gap:10px;padding:8px 0 7px;border-bottom:1px solid #e3dfd7}.ds-num{text-align:right;font-weight:800;font-size:15px}.ds-title{font-weight:800;font-size:22px;line-height:1.05;letter-spacing:.01em;text-transform:uppercase}.ds-sub{font-size:12.5px;font-weight:500;color:#5c544a}.ds-dur{text-align:right;font-weight:600}.ds-struck .ds-title{color:#5c544a}.ds-struck::after{content:'';position:absolute;left:28px;right:60px;top:18px;height:3px;background:#111;border-radius:2px;transform:rotate(-1deg)}.ds-note{grid-column:2/4;font-family:'Shantell Sans',ui-rounded,cursive;font-size:14px;transform:rotate(-1.2deg);background:linear-gradient(transparent,transparent)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Stage Setlist",
+    "overview": "Each canonical playlist is the band's setlist: printed in bold caps on paper, taped to a dark stage deck. Nothing leaves a list without a visible marker strike and a handwritten margin note saying why. The shell is warm black, the lists live on printer-paper sheets, and colour is rationed to spike-tape tabs that only ever mean a service or an attention state.",
+    "keyCharacteristics": [
+      "One warm neutral ramp (deck to paper); the only light surfaces are paper sheets.",
+      "Colour appears only as tape: three services plus yellow for attention.",
+      "Archivo heavy caps for titles and numbers; Shantell Sans only for margin notes.",
+      "Square 2px corners, hairline rules, shallow paper shadow.",
+      "Motion is ink drawing and tape pressing down; content never fades in from nothing."
+    ],
+    "rules": [
+      {
+        "name": "The Tape Means Something Rule",
+        "body": "Tape colour appears only for a service or an attention state. A tape that is merely pretty is a defect.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Ramp Rule",
+        "body": "Neutrals come from the single deck ramp; do not introduce a new grey.",
+        "section": "colors"
+      },
+      {
+        "name": "The Hand Is For Notes Rule",
+        "body": "Shantell Sans appears only as a margin note or the plus mark; never for UI chrome.",
+        "section": "typography"
+      },
+      {
+        "name": "The Caps Are Printed Rule",
+        "body": "Uppercase heavy Archivo is for titles and numbers; running text stays sentence case.",
+        "section": "typography"
+      },
+      {
+        "name": "The Paper Sits Down Rule",
+        "body": "Only paper sheets get the lifted shadow; no other surface rises.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do put lists on paper sheets and everything else on the deck.",
+      "Do show proof for any status claim with per-service tape.",
+      "Do draw a strike and write a margin note when a row is removed or deduped.",
+      "Do draw durations and run times to true scale.",
+      "Do keep focus rings 2px: paper on the deck, ink on paper.",
+      "Do honour prefers-reduced-motion; animations shorten to 1ms."
+    ],
+    "donts": [
+      "Don't use tape colours for decoration or for anything that is not a service or an attention state.",
+      "Don't use official provider logos; name providers in text and tape.",
+      "Don't round corners beyond 2px, add glows, or add new shadows.",
+      "Don't fade content in from nothing; ink draws and tape presses.",
+      "Don't build stat-card rows or a zinc dashboard.",
+      "Don't use Shantell Sans outside margin notes."
+    ]
+  }
+}

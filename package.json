@@ -1,0 +1,19 @@
+{
+  "name": "crossfade",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Self-hosted two-way playlist sync for Spotify, YouTube Music and Apple Music",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@11.10.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @crossfade/shared build && pnpm -r --parallel --filter @crossfade/shared --filter @crossfade/api --filter @crossfade/web dev",
+    "build": "pnpm --filter @crossfade/shared build && pnpm --filter @crossfade/api build && pnpm --filter @crossfade/web build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "db:generate": "pnpm --filter @crossfade/api db:generate"
+  }
+}

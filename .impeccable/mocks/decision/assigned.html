@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Crossfade — Overview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=Shantell+Sans:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--deck:#16130f;--n1:#1f1b16;--n2:#2b261f;--n3:#433c33;--n4:#5c544a;--n5:#8a8175;--n6:#b4aca0;--n7:#e3dfd7;--paper:#f6f5f1;--ink:#111;
+--sp:#3ad65b;--am:#ff3d8b;--yt:#ff5a1f;--warn:#f4e400;--hand:"Shantell Sans",cursive}
+*{box-sizing:border-box}
+html,body{width:1440px;height:900px;overflow:hidden;margin:0}
+body{background:var(--deck);color:var(--paper);font:400 14px/1.4 Archivo,sans-serif;font-variant-numeric:tabular-nums;display:grid;grid-template-columns:200px 1fr 308px;grid-template-rows:108px 1fr}
+a{color:inherit}
+.caps{text-transform:uppercase;font-weight:800}
+.lbl{display:block;font:700 11px/1 Archivo;letter-spacing:.12em;text-transform:uppercase;color:var(--n5)}
+/* tape tabs: one component, used for services and states only */
+.t{display:inline-grid;place-items:center;width:40px;height:16px;font:800 9px/1 Archivo;font-style:normal;letter-spacing:.06em;color:var(--ink)}
+.sp{background:var(--sp)}.yt{background:var(--yt)}.am{background:var(--am)}.rv{background:var(--warn)}
+.t.no{outline:1px dashed #c4beb3;outline-offset:-1px}
+.t.w{width:auto;padding:0 6px}
+/* rail */
+.rail{grid-row:1/3;display:flex;flex-direction:column;padding:30px 14px 18px;border-right:1px solid var(--n2)}
+.brand{font:900 22px/1 Archivo;font-stretch:112%;letter-spacing:.01em;padding:0 12px 40px}
+.rail nav a{display:flex;justify-content:space-between;align-items:center;height:38px;padding:0 12px;color:var(--n6);text-decoration:none;font-weight:600;font-size:14.5px;border-left:3px solid transparent}
+.rail nav a.on{color:var(--paper);background:var(--n1);border-left-color:var(--paper);font-weight:700}
+.rail nav .t{width:24px}
+.me{margin-top:auto;display:flex;gap:10px;align-items:center;padding:14px 12px 0;border-top:1px solid var(--n2)}
+.me b{width:30px;height:30px;display:grid;place-items:center;background:var(--n3);font-weight:800}
+.me small{display:block;color:var(--n5);font-size:12px}
+/* header */
+header{grid-column:2/4;display:flex;align-items:flex-end;justify-content:space-between;padding:0 28px 18px;border-bottom:1px solid var(--n2)}
+h1{margin:6px 0 10px;font:900 34px/1 Archivo;font-stretch:112%;text-transform:uppercase;letter-spacing:.005em}
+.proof{display:flex;gap:18px;color:var(--n6);font-size:13px}
+.proof span{display:flex;gap:7px;align-items:center}.proof .t{width:26px;height:10px}
+.next{display:flex;align-items:flex-end;gap:24px}
+.next .when{text-align:right}.next .when b{font:800 28px/1 Archivo;font-stretch:108%;margin-right:6px}.next .when span{color:var(--n6);font-size:13px}
+.btn{font:700 14px/1 Archivo;padding:13px 22px;background:var(--paper);color:var(--ink);border:0;border-radius:2px;cursor:pointer}
+.btn2{font:700 13px/1 Archivo;padding:10px 14px;background:none;color:var(--paper);border:1px solid var(--n4);border-radius:2px;cursor:pointer}
+/* sheet */
+main{padding:24px 28px 0;min-width:0}
+.sheet{position:relative;background:var(--paper);color:var(--ink);transform:rotate(-.3deg);padding:24px 22px 0;box-shadow:0 2px 0 #0a0806}
+.tape{position:absolute;top:-4px;width:98px;height:26px;background:var(--n3);clip-path:polygon(0 12%,4% 0,100% 6%,96% 38%,100% 70%,97% 100%,2% 92%,5% 55%)}
+.tape.l{left:-36px;transform:rotate(-38deg)}.tape.r{right:-36px;transform:rotate(38deg)}
+.meta{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;color:var(--n4)}
+.guide{font:800 13px/1 Archivo;letter-spacing:.06em;color:var(--ink)}
+h2{margin:10px 0 14px;font:900 46px/1 Archivo;font-stretch:118%;text-transform:uppercase;letter-spacing:-.005em}
+.tally{display:flex;align-items:center;gap:26px;padding-bottom:16px}
+.tally div{display:flex;align-items:baseline;gap:7px;white-space:nowrap}
+.tally b{font:900 28px/1 Archivo;font-stretch:108%}
+.tally small{font:700 11px/1 Archivo;letter-spacing:.1em;text-transform:uppercase;color:var(--n4)}
+.tally .dur{margin-left:auto;align-items:center;gap:12px}
+.scale{width:240px;height:12px;border-bottom:1px solid var(--n5);background:repeating-linear-gradient(90deg,var(--n5) 0 1px,transparent 1px 40px)}
+.scale i{display:block;width:152px;height:11px;background:var(--ink)}
+.row{position:relative;display:grid;grid-template-columns:28px 30px 1fr 46px 128px 182px;gap:0 9px;align-items:start;height:52px;padding-top:7px;border-bottom:1px solid var(--n7)}
+.row.hd{align-items:center;padding-top:0;height:26px;border-bottom:2px solid var(--ink);font:700 10.5px/1 Archivo;letter-spacing:.1em;text-transform:uppercase;color:var(--n4)}
+.n{text-align:right;font-weight:800;font-size:15px;line-height:26px}
+.ti{font:800 24px/1 Archivo;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ti small{display:block;margin-top:5px;font:500 12.5px/1 Archivo;letter-spacing:0;color:var(--n4)}
+.d{text-align:right;font-weight:600;font-size:14px;line-height:26px}
+.tabs{display:flex;gap:4px;align-items:center;height:24px}
+.note{font:500 14px/1.15 var(--hand);transform:rotate(-1.4deg);transform-origin:left center;align-self:center}
+.note mark{background:var(--warn);color:var(--ink);padding:0 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.plus{font:700 32px/24px var(--hand);text-align:center;transform:rotate(-8deg)}
+.x .ti{color:var(--n5)}.x .ti small,.x .n,.x .d{color:var(--n4)}
+.strike{position:absolute;left:74px;top:8px;width:436px;height:22px;overflow:visible;pointer-events:none}
+.strike path{fill:none;stroke:var(--ink);stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round}
+.foot{display:flex;justify-content:space-between;align-items:center;height:44px;font-size:13px;color:var(--n4)}
+.foot a{color:var(--ink);font-weight:700;text-decoration:none;border-bottom:2px solid var(--ink)}
+/* deck column */
+aside{padding:24px 28px 0 0;display:flex;flex-direction:column;gap:20px;min-width:0}
+.svc{display:grid;grid-template-columns:40px 1fr auto;gap:3px 10px;align-items:center;padding:11px 0;border-top:1px solid var(--n2)}
+.svc h3{margin:0;font:800 15px/1.1 Archivo;font-stretch:106%;text-transform:uppercase}
+.svc em{font-style:normal;font-size:12px;color:var(--n6)}
+.svc p{grid-column:2/4;margin:0;color:var(--n6);font-size:12.5px}
+.rev{position:relative;background:var(--n1);padding:18px 16px 16px}
+.rev::before{content:"";position:absolute;top:-5px;left:16px;width:46px;height:12px;background:var(--warn)}
+.rh{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+.rh b{font:900 40px/1 Archivo;font-stretch:112%}.rh span{font:800 16px/1 Archivo;text-transform:uppercase;font-stretch:106%}
+.rev p{margin:0 0 4px;font-size:13px;color:var(--n6)}.rev p strong{color:var(--paper)}
+.rev .btn2{margin-top:10px}
+.run{display:grid;grid-template-columns:1fr auto;gap:7px 10px;padding:10px 0;border-top:1px solid var(--n2);font-size:13px}
+.run b{font-weight:700}.run>span{color:var(--n6)}
+.bar{grid-column:1/3;display:flex;align-items:center;gap:9px;color:var(--n6);font-size:12px}
+.bar>i:not(.t){display:block;height:7px;background:var(--n7)}
+</style></head>
+<body>
+<aside class="rail">
+  <div class="brand">CROSSFADE</div>
+  <nav>
+    <a class="on" href="#">Overview</a><a href="#">Playlists</a><a href="#">Liked Songs</a>
+    <a href="#">Review <i class="t rv">7</i></a><a href="#">Runs</a><a href="#">Connections</a><a href="#">API &amp; Webhooks</a><a href="#">Settings</a>
+  </nav>
+  <div class="me"><b>Z</b><div>zoha<small>admin</small></div></div>
+</aside>
+
+<header>
+  <div>
+    <span class="lbl">Overview</span>
+    <h1>All services in sync</h1>
+    <div class="proof"><span><i class="t sp"></i>Spotify 14/14</span><span><i class="t yt"></i>YouTube Music 14/14</span><span><i class="t am"></i>Apple Music 14/14</span><span>lists matched · run 21:00</span></div>
+  </div>
+  <div class="next">
+    <div class="when"><span class="lbl" style="margin-bottom:8px">Next sync</span><b>21:30</b><span>every 30 min</span></div>
+    <button class="btn">Sync now</button>
+  </div>
+</header>
+
+<main>
+  <section class="sheet" aria-label="Last run of Late Night Drive">
+    <i class="tape l"></i><i class="tape r"></i>
+    <div class="meta"><span>Last run · tonight 21:00 · 142 tracks · showing 1–10</span><span class="guide">MIDNIGHT CITY — TADOW</span></div>
+    <h2>Late Night Drive</h2>
+    <div class="tally">
+      <div><b>+2</b><small>added</small></div><div><b>−1</b><small>removed</small></div>
+      <div><b>1</b><small>dup</small></div><div><b>1</b><i class="t rv w">REVIEW</i></div>
+      <div class="dur"><b>38 s</b><span class="scale" title="0–60 s"><i></i></span><small>0–60 s</small></div>
+    </div>
+    <div class="row hd"><span></span><span>#</span><span>Title · artist</span><span style="text-align:right">Time</span><span>Held on</span><span>Notes</span></div>
+    <div class="row"><span></span><span class="n">1</span><div class="ti">MIDNIGHT CITY<small>M83</small></div><span class="d">4:03</span><span class="tabs"><i class="t sp">SP</i><i class="t yt">YT</i><i class="t am">AM</i></span><span></span></div>
+    <div class="row"><span></span><span class="n">2</span><div class="ti">NIGHTCALL<small>Kavinsky</small></div><span class="d">4:18</span><span class="tabs"><i class="t sp">SP</i><i class="t yt">YT</i><i class="t am">AM</i></span><span></span></div>
+    <div class="row"><span></span><span class="n">3</span><div class="ti">TEARDROP<small>Massive Attack</small></div><span class="d">5:29</span><span class="tabs"><i class="t sp">SP</i><i class="t yt">YT</i><i class="t am">AM</i></span><span></span></div>
+    <div class="row"><span class="plus">+</span><span class="n">4</span><div class="ti">INSTANT CRUSH<small>Daft Punk, Julian Casablancas</small></div><span class="d">5:37</span><span class="tabs"><i class="t sp">SP</i><i class="t yt">YT</i><i class="t am">AM</i></span><span class="note">added on YouTube Music · pushed to others</span></div>
+    <div class="row"><span class="plus">+</span><span class="n">5</span><div class="ti">PINK + WHITE<small>Frank Ocean</small></div><span class="d">3:04</span><span class="tabs"><i class="t sp">SP</i><i class="t yt">YT</i><i class="t am">AM</i></span><span class="note">added on Spotify · pushed to others</span></div>
+    <div class="row x"><span></span><span class="n">6</span><div class="ti">DREAMS (2004 REMASTER)<small>Fleetwood Mac</small></div><span class="d">4:17</span><span class="tabs"><i class="t no"></i><i class="t no"></i><i class="t no"></i></span><span class="note">DUP of #7 — kept original</span>
+      <svg class="strike" viewBox="0 0 478 22" preserveAspectRatio="none" aria-hidden="true"><path d="M3 13 C70 9 150 15 232 11 S392 7 474 10"/></svg></div>
+    <div class="row"><span></span><span class="n">7</span><div class="ti">DREAMS<small>Fleetwood Mac</small></div><span class="d">4:14</span><span class="tabs"><i class="t sp">SP</i><i class="t yt">YT</i><i class="t am">AM</i></span><span></span></div>
+    <div class="row x"><span></span><span class="n">8</span><div class="ti">ELECTRIC FEEL<small>MGMT</small></div><span class="d">3:49</span><span class="tabs"><i class="t no"></i><i class="t no"></i><i class="t am">AM</i></span><span class="note">removed on Spotify · <mark>Apple: remove by hand</mark></span>
+      <svg class="strike" viewBox="0 0 478 22" preserveAspectRatio="none" aria-hidden="true"><path d="M4 9 C88 14 168 8 254 12 S404 15 475 7"/></svg></div>
+    <div class="row"><span></span><span class="n">9</span><div class="ti">REDBONE<small>Childish Gambino</small></div><span class="d">5:26</span><span class="tabs"><i class="t sp">SP</i><i class="t rv">REVIEW</i><i class="t am">AM</i></span><span class="note">YT Music: 2 candidates, best 0.71</span></div>
+    <div class="row"><span></span><span class="n">10</span><div class="ti">TADOW<small>Masego, FKJ</small></div><span class="d">5:01</span><span class="tabs"><i class="t sp">SP</i><i class="t yt">YT</i><i class="t am">AM</i></span><span></span></div>
+    <div class="foot"><span>Tracks 1–10 of 142 · all 5 changes from this run in view</span><a href="#">Open full playlist</a></div>
+  </section>
+</main>
+
+<aside>
+  <section>
+    <span class="lbl" style="margin-bottom:10px">Services</span>
+    <div class="svc"><i class="t sp">SP</i><h3>Spotify</h3><em>Connected</em><p>Signed in as zoha · 38 playlists</p></div>
+    <div class="svc"><i class="t yt">YT</i><h3>YouTube Music</h3><i class="t rv w">12 DAYS</i><p>Cookie auth expires in 12 days · <a href="#">Renew</a></p></div>
+    <div class="svc"><i class="t am">AM</i><h3>Apple Music</h3><em>Add-only</em><p>Connected · removals are flagged for you</p></div>
+  </section>
+  <section class="rev">
+    <div class="rh"><b>7</b><span>to review</span></div>
+    <p><strong>Redbone</strong> → YouTube Music<br>2 candidates, best 0.71</p>
+    <p>+ 6 more low-confidence matches</p>
+    <button class="btn2">Review tracks</button>
+  </section>
+  <section>
+    <span class="lbl" style="margin-bottom:10px">Recent runs · bar = run time</span>
+    <div class="run"><b>Late Night Drive</b><span>21:00</span><div class="bar"><i style="width:152px"></i>38 s ✓</div></div>
+    <div class="run"><b>Gym — Heavy</b><span>20:30</span><div class="bar"><i style="width:48px"></i>12 s ✓</div></div>
+    <div class="run"><b>Sunday Coffee</b><span>20:00</span><div class="bar"><i style="width:36px"></i>9 s ✓</div></div>
+    <div class="run"><b>Liked Songs</b><span>19:30</span><div class="bar"><i style="width:20px"></i><i class="t rv w">GUARD</i>would remove 41%</div></div>
+  </section>
+</aside>
+</body></html>

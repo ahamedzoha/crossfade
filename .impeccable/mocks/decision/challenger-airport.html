@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Crossfade — Overview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1440px;height:900px;overflow:hidden;margin:0}
+:root{--y:#ffcc00;--k:#0b0b0b;--g:#e6e6e6;--w:#fff;--r:#c8102e;--a:#b45309;--m:#5e5e5e;--rule:#dcdcdc}
+body{font-family:Hind,"Frutiger","Segoe UI",sans-serif;background:var(--g);color:var(--k);display:grid;grid-template-columns:232px 1208px;font-size:16px;line-height:1.25;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+a{color:inherit;text-decoration:none}
+svg.i{width:1em;height:1em;fill:currentColor;flex:none}
+.sq{display:grid;place-items:center;background:var(--k);color:var(--w);flex:none;font-weight:700;line-height:1}
+.sq svg{width:56%;height:56%;fill:currentColor}
+/* rail */
+nav{background:var(--k);color:var(--w);display:flex;flex-direction:column;height:900px}
+.top{height:228px;padding:30px 24px 26px;display:flex;flex-direction:column;justify-content:space-between;border-bottom:1px solid #262626}
+.brand{display:flex;align-items:center;gap:12px;font-size:26px;font-weight:600;letter-spacing:-.01em}
+.brand .sq{width:38px;height:38px;background:var(--w);color:var(--k)}
+.brand .sq svg{fill:none}
+.inst{font-size:14px;color:#9a9a9a;line-height:1.55}.inst b{color:#e8e8e8;font-weight:500}
+.links{padding:16px 0;display:flex;flex-direction:column}
+.links a{height:46px;display:flex;align-items:center;gap:10px;padding:0 24px;font-size:17px;font-weight:500;color:#e6e6e6}
+.links a.on{background:var(--y);color:var(--k);font-weight:600}
+.links a b{margin-left:auto;min-width:30px;height:26px;display:grid;place-items:center;background:var(--w);color:var(--k);font-size:15px;font-weight:700}
+.links a i{margin-left:auto;width:9px;height:9px}
+.user{margin-top:auto;height:80px;border-top:1px solid #262626;display:flex;align-items:center;gap:12px;padding:0 24px;font-size:17px;font-weight:600}
+.user .sq{width:38px;height:38px;background:var(--w);color:var(--k);font-size:19px}
+.user small{display:block;font-size:13px;font-weight:400;color:#9a9a9a}
+/* band */
+main{display:flex;flex-direction:column;height:900px}
+.band{height:176px;background:var(--y);display:flex;align-items:center;padding-left:40px;overflow:hidden}
+.n{font-size:204px;font-weight:600;line-height:176px;height:176px;letter-spacing:-.04em;margin-right:34px;transform:translateY(15px)}
+.msg h1{font-size:62px;font-weight:600;line-height:1;letter-spacing:-.015em}
+.msg p{font-size:34px;font-weight:500;margin-top:12px;display:flex;align-items:center;gap:12px;line-height:1}
+.msg p svg{width:30px;height:30px}
+.msg small{display:block;font-size:18px;margin-top:12px;font-weight:500}
+.go{margin-left:auto;width:176px;height:176px;background:var(--k);color:var(--w);display:flex;flex-direction:column;justify-content:space-between;padding:18px 0 20px 22px;font-size:22px;font-weight:600}
+.go svg{width:100px;height:100px;align-self:flex-end;margin-right:-6px}
+.strip{height:52px;background:var(--k);color:var(--w);display:flex;align-items:center;padding-left:40px;gap:14px;white-space:nowrap}
+.strip svg{width:22px;height:22px}
+.strip strong{font-size:22px;font-weight:600}
+.strip span{font-size:16px;color:#b8b8b8}
+.strip .next{margin-left:auto;font-size:22px;font-weight:500;padding-right:28px}
+.sync{width:176px;height:52px;background:var(--w);color:var(--k);font-size:20px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:10px}
+/* body */
+.body{flex:1;padding:24px 40px 0;display:flex;flex-direction:column;gap:22px}
+.hd{height:32px;display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+.hd h2{font-size:24px;font-weight:600;letter-spacing:-.005em}
+.hd span{font-size:16px;color:var(--m)}
+.hd a{margin-left:auto;font-size:16px;font-weight:600;border-bottom:2px solid}
+.board{background:var(--w)}
+.tr{display:grid;grid-template-columns:280px 132px 92px 104px 120px 1fr 44px;align-items:center;height:44px;padding-left:20px;border-bottom:1px solid var(--rule)}
+.tr:last-child{border:0}
+.th{height:30px;font-size:14px;color:var(--m);font-weight:500;border-bottom:2px solid var(--k)}
+.pl{font-size:22px;font-weight:600;letter-spacing:-.005em}
+.t{font-size:26px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.num{font-size:17px;font-variant-numeric:tabular-nums}
+.svc{display:flex;gap:4px}
+.svc i{width:24px;height:24px;display:grid;place-items:center;background:var(--k);color:var(--w);font:700 13px/1 Hind,sans-serif;font-style:normal}
+.svc i.off{background:none;border:2px solid var(--rule);color:transparent}
+.st{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:500}
+.st .sq{width:26px;height:26px;font-size:17px}
+.bad,.st.bad{color:var(--r);font-weight:600}.st.bad .sq{background:var(--r);color:var(--w)}
+.arw{width:44px;height:44px;justify-self:end}
+.row{display:grid;grid-template-columns:1fr 360px;gap:24px}
+.panel{background:var(--w);height:302px}
+.tally{height:52px;display:grid;grid-template-columns:repeat(4,auto);border-bottom:2px solid var(--k)}
+.tally div{display:flex;align-items:center;gap:10px;padding:0 18px;font-size:16px;font-weight:500}
+.tally div+div{border-left:1px solid var(--rule)}
+.tally .sq{width:26px;height:26px;font-size:17px}
+.tally b{font-size:32px;font-weight:600;line-height:1;margin-top:4px}
+.ch{display:grid;grid-template-columns:50px 1fr 56px 330px 50px;align-items:center;height:50px;border-bottom:1px solid var(--rule)}
+.ch:last-child{border:0}
+.ch>.sq{width:50px;height:50px;font-size:24px}
+.ti{padding-left:16px;line-height:1.15;white-space:nowrap;overflow:hidden}
+.ti b,.w b{display:block;font-size:19px;font-weight:600}
+.ti small,.w small{display:block;font-size:14px;color:var(--m)}
+.w b{font-size:15px}.w .warn{color:var(--a);font-weight:600}
+.d{font-size:15px;color:var(--m);font-variant-numeric:tabular-nums}
+.cx{display:flex;flex-direction:column}
+.c{flex:1;display:grid;grid-template-columns:40px 1fr auto;grid-template-rows:auto auto;column-gap:14px;row-gap:2px;align-content:center;align-items:center;padding:0 20px;border-bottom:1px solid var(--rule)}
+.c:last-child{border:0}
+.c .sq{width:40px;height:40px;font-size:18px;grid-row:span 2}
+.c h3{font-size:22px;font-weight:600;line-height:1.1}
+.c p{font-size:15px;color:var(--m);grid-column:2/4;white-space:nowrap}
+.c .tag{grid-row:1;grid-column:3;justify-self:end;font-size:15px;font-weight:600;display:flex;align-items:center;gap:6px}
+.c p.warn{color:var(--a);font-weight:600}
+.btn{height:36px;padding:0 14px;border:2px solid var(--k);font-weight:600;font-size:15px}
+</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="ar" viewBox="0 0 24 24"><path d="M2 10h13.2L9.6 4.4 11.7 2.3 21.4 12l-9.7 9.7-2.1-2.1 5.6-5.6H2z"/></symbol>
+<symbol id="ck" viewBox="0 0 24 24"><path d="M9.2 17.6 3.6 12l2.1-2.1 3.5 3.5 9.1-9.1 2.1 2.1z"/></symbol>
+<symbol id="pl" viewBox="0 0 24 24"><path d="M10.5 3h3v7.5H21v3h-7.5V21h-3v-7.5H3v-3h7.5z"/></symbol>
+<symbol id="mi" viewBox="0 0 24 24"><path d="M3 10.5h18v3H3z"/></symbol>
+<symbol id="mg" viewBox="0 0 24 24"><path d="M2 4h5.6l5 6.5H16V7.5l6 4.5-6 4.5v-3h-3.4l-5 6.5H2v-3h4.1l3.8-5-3.8-5H2z"/></symbol>
+<symbol id="xf" viewBox="0 0 24 24"><path d="M1 18h4c7 0 7-12 14-12h4M1 6h4c7 0 7 12 14 12h4" stroke="currentColor" stroke-width="2.6"/></symbol>
+</defs></svg>
+
+<nav aria-label="Main">
+  <div class="top">
+    <div class="brand"><span class="sq"><svg><use href="#xf"/></svg></span>Crossfade</div>
+    <div class="inst"><b>music.home.lan</b><br>v0.4.2 · 1 container · up 6 days</div>
+  </div>
+  <div class="links">
+    <a class="on" href="#" aria-current="page">Overview</a>
+    <a href="#">Playlists</a>
+    <a href="#">Liked Songs <i style="background:var(--r)" title="Guard stopped"></i></a>
+    <a href="#">Review <b>7</b></a>
+    <a href="#">Runs</a>
+    <a href="#">Connections <i style="background:var(--a)" title="Cookie expires soon"></i></a>
+    <a href="#">API &amp; Webhooks</a>
+    <a href="#">Settings</a>
+  </div>
+  <div class="user"><span class="sq">Z</span><div>zoha<small>Admin</small></div></div>
+</nav>
+
+<main>
+  <section class="band" aria-label="Next decision">
+    <div class="n">7</div>
+    <div class="msg">
+      <h1>tracks to review</h1>
+      <p>Next: Redbone <svg class="i"><use href="#ar"/></svg> YouTube Music</p>
+      <small>2 candidates, best match 0.71 · then 6 more in the queue</small>
+    </div>
+    <a class="go" href="#review"><svg class="i"><use href="#ar"/></svg>Start review</a>
+  </section>
+  <div class="strip">
+    <svg class="i"><use href="#ck"/></svg><strong>All services in sync</strong>
+    <span>3 of 3 services connected · last run 21:00 · 38 s · 0 errors</span>
+    <div class="next">Next sync 21:30 · every 30 min</div>
+    <button class="sync" type="button">Sync now</button>
+  </div>
+
+  <div class="body">
+    <section>
+      <div class="hd"><h2>Playlists</h2><span>4 synced of 38 on Spotify</span><a href="#">Manage playlists</a></div>
+      <div class="board" role="table">
+        <div class="tr th" role="row"><span>Playlist</span><span>Services</span><span>Tracks</span><span>Last run</span><span>Next sync</span><span>Status</span><span></span></div>
+        <div class="tr" role="row"><span class="pl">Late Night Drive</span><span class="svc"><i>S</i><i>Y</i><i>A</i></span><span class="num">142</span><span class="num">21:00</span><span class="t">21:30</span><span class="st"><span class="sq"><svg><use href="#ck"/></svg></span>In sync · 1 in review</span><span></span></div>
+        <div class="tr" role="row"><span class="pl">Liked Songs</span><span class="svc"><i>S</i><i>Y</i><i>A</i></span><span class="num">1,284</span><span class="num">19:30</span><span class="t bad">Held</span><span class="st bad"><span class="sq">!</span>Guard stopped — would remove 41%</span><a class="sq arw" href="#" aria-label="Review held removals"><svg><use href="#ar"/></svg></a></div>
+        <div class="tr" role="row"><span class="pl">Gym — Heavy</span><span class="svc"><i>S</i><i>Y</i><i class="off">A</i></span><span class="num">86</span><span class="num">20:30</span><span class="t">21:30</span><span class="st"><span class="sq"><svg><use href="#ck"/></svg></span>In sync</span><span></span></div>
+        <div class="tr" role="row"><span class="pl">Sunday Coffee</span><span class="svc"><i>S</i><i class="off">Y</i><i>A</i></span><span class="num">54</span><span class="num">20:00</span><span class="t">22:00</span><span class="st"><span class="sq"><svg><use href="#ck"/></svg></span>In sync</span><span></span></div>
+      </div>
+    </section>
+
+    <div class="row">
+      <section>
+        <div class="hd"><h2>Last run · Late Night Drive</h2><span>142 tracks · 21:00 · took 38 s</span><a href="#">Open run</a></div>
+        <div class="panel">
+          <div class="tally">
+            <div><span class="sq"><svg><use href="#pl"/></svg></span><b>2</b>added</div>
+            <div><span class="sq"><svg><use href="#mi"/></svg></span><b>1</b>removed</div>
+            <div><span class="sq"><svg><use href="#mg"/></svg></span><b>1</b>duplicate collapsed</div>
+            <div><span class="sq">?</span><b>1</b>to review</div>
+          </div>
+          <div class="ch"><span class="sq"><svg><use href="#pl"/></svg></span><div class="ti"><b>Instant Crush</b><small>Daft Punk, Julian Casablancas</small></div><span class="d">5:37</span><div class="w"><b>Added on YouTube Music</b><small>Pushed to Spotify, Apple Music</small></div><span></span></div>
+          <div class="ch"><span class="sq"><svg><use href="#pl"/></svg></span><div class="ti"><b>Pink + White</b><small>Frank Ocean</small></div><span class="d">3:04</span><div class="w"><b>Added</b><small>Now on all three services</small></div><span></span></div>
+          <div class="ch"><span class="sq"><svg><use href="#mg"/></svg></span><div class="ti"><b>Dreams (2004 Remaster)</b><small>Fleetwood Mac</small></div><span class="d">4:17</span><div class="w"><b>Duplicate collapsed</b><small>Same recording as #7 Dreams · kept the original</small></div><span></span></div>
+          <div class="ch"><span class="sq"><svg><use href="#mi"/></svg></span><div class="ti"><b>Electric Feel</b><small>MGMT</small></div><span class="d">3:49</span><div class="w"><b>Removed on Spotify, YouTube Music</b><small class="warn">Apple Music is add-only — remove by hand</small></div><a class="sq" style="width:50px;height:50px" href="#" aria-label="How to remove on Apple Music"><svg><use href="#ar"/></svg></a></div>
+          <div class="ch"><span class="sq">?</span><div class="ti"><b>Redbone</b><small>Childish Gambino</small></div><span class="d">5:26</span><div class="w"><b>Low-confidence match on YouTube Music</b><small>In review · 2 candidates, best 0.71</small></div><a class="sq" style="width:50px;height:50px" href="#review" aria-label="Review Redbone"><svg><use href="#ar"/></svg></a></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="hd"><h2>Connections</h2><span>3 linked</span></div>
+        <div class="panel cx">
+          <div class="c"><span class="sq">S</span><h3>Spotify</h3><span class="tag"><svg class="i"><use href="#ck"/></svg>Connected</span><p>Signed in as zoha · 38 playlists</p></div>
+          <div class="c"><span class="sq">Y</span><h3>YouTube Music</h3><span class="tag"><button class="btn" type="button">Renew</button></span><p class="warn">Cookie expires in 12 days · 4 Nov</p></div>
+          <div class="c"><span class="sq">A</span><h3>Apple Music</h3><span class="tag">Add-only</span><p>Connected · 1 removal to do by hand</p></div>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+</body></html>

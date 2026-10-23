@@ -1,0 +1,17 @@
+packages:
+  - apps/*
+  - packages/*
+allowBuilds:
+  better-sqlite3: true
+  "@node-rs/argon2": true
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
+  "@swc/core": true
+onlyBuiltDependencies:
+  - better-sqlite3
+  - "@node-rs/argon2"
+  - esbuild
+  - sharp
+  - unrs-resolver
+  - "@swc/core"
